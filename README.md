@@ -28,8 +28,8 @@ This project deliberately does **not** include a hosted model, a voice model, a 
 ### 1. Download the project
 
 ```bash
-git clone https://github.com/YOUR-ACCOUNT/voice-companion-starter.git
-cd voice-companion-starter
+git clone https://github.com/mclee1975/voice-companion-starter-public.git
+cd voice-companion-starter-public
 ```
 
 ### 2. Create a Python environment
@@ -132,6 +132,39 @@ python -m compileall -q app.py
 - Requests are size-limited and upstream failures return generic errors.
 - The server does not persist transcripts or audio files.
 - This starter is not an authentication system or a public SaaS product. Keep it private unless you add proper HTTPS, identity-aware access control, rate limiting, and monitoring.
+
+## Repository guide
+
+| Path | Purpose |
+|---|---|
+| `app.py` | FastAPI bridge and server-side trust boundary |
+| `static/` | Dependency-free browser UI |
+| `.env.example` | Complete operator configuration reference |
+| `compose.yaml` / `Dockerfile` | Loopback-first container option |
+| `test_app.py` | Boundary and configuration regression tests |
+| `docs/` | Architecture, API, and security references |
+
+## Documentation
+
+- [Project purpose and compatibility](PROJECT_PURPOSE.md)
+- [Architecture and data flow](docs/ARCHITECTURE.md)
+- [API reference](docs/API.md)
+- [Security and privacy](docs/SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+
+## Troubleshooting
+
+| Symptom | First check |
+|---|---|
+| Browser cannot connect | Confirm the process is running and open `http://127.0.0.1:8787/health` on the host. |
+| `502` response | Verify the configured agent, STT, or TTS endpoint is reachable from the bridge host and returns the documented response shape. |
+| Microphone never starts | Use a secure browser context where required and grant microphone permission. |
+| Non-local bind is refused | Set a long random `VOICE_COMPANION_TOKEN` before changing `VOICE_COMPANION_HOST`; use a trusted authenticated reverse proxy as well. |
+| Audio does not play | Check that TTS returns a browser-playable audio content type and that the browser allows playback after user interaction. |
+
+## Support and maintenance
+
+Use GitHub Issues for reproducible bugs and feature requests. Keep reports free of credentials, private endpoints, recordings, and personal data. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
