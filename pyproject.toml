@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voice-companion-starter"
+version = "0.1.0"
+description = "A secure-by-default, self-hosted browser voice companion starter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = ["fastapi>=0.115,<1", "httpx>=0.27,<1", "pydantic>=2.7,<3", "uvicorn[standard]>=0.30,<1"]
+
+[tool.setuptools]
+py-modules = ["app"]
